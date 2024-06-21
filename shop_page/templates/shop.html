@@ -135,13 +135,23 @@ shop page
 
 <form class="modal-window" method="post" enctype="multipart/form-data" style="display: none;">
     <h1 class="name-edit change">CHANGE IMAGE:</h1>
-    <input type = "file" name = "data" accept= "" class="modal-input">
+    <input type = "file" name = "data" accept= "" class="modal-input" id="">
+    <label for="img" class="label-img">
+        <span class="select">SELECT A FILE</span>
+        <span class="filename">NO FILE SELECTED</span>
+    </label>
     <button class="send-button" name = "send" value = "{{id}};{{type}}">SEND</button>
 </form>
+
+
 <form class="modal-window-add" method="post" enctype="multipart/form-data" style="display: none;">
     <h1 class="new-product">NEW PRODUCT</h1>
     <h1 class="name-edit add">IMAGE PRODUCT:</h1>
-    <input type = "file" name = "image" accept= "image/*" class="modal-input add">
+    <input type = "file" name = "image" accept= "image/*" class="modal-input add" id="img" style="display:none;">
+    <label for="img" class="label-img">
+        <span class="select">SELECT A FILE</span>
+        <span class="filename">NOT FILE SELECTED</span>
+    </label>
     <h1 class="name-edit add">NAME PRODUCT:</h1>
     <input type = "text" name = "name" class="modal-input add">
     <h1 class="name-edit add">DESCRIPTION PRODUCT:</h1>

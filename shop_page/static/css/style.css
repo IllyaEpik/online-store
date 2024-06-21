@@ -794,3 +794,102 @@ z-index: 5;
     height: 15px;
     width: 15px;
 }
+.label-img{ 
+    width: 500px;
+    height: 20px;
+    /* Frame 37 */
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 10px;
+gap: 10px;
+
+/* position: absolute; */
+width: 400px;
+height: 55px;
+left: 115.5px;
+top: 139.25px;
+
+border: 2px solid #000000;
+border-radius: 15px;
+
+}
+.select{
+    /* Frame 38 */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 1px 31px;
+gap: 10px;
+
+/* width: 241px;
+height: 55px; */
+
+background: #D1D8DB;
+border: 1px solid #000000;
+border-radius: 10px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+/* select a file */
+
+/* width: 176px; */
+height: 40px;
+
+font-family: 'Inter';
+font-style: normal;
+
+font-weight: 400;
+font-size: 20px;
+line-height: 30px;
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: uppercase;
+
+color: #000000;
+
+border: 1px solid #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+/* flex-direction: column */
+
+}
+.filename{
+    /* no file selected */
+
+/* width: 199px; */
+height: 51px;
+/* flex-direction: column; */
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: uppercase;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+}

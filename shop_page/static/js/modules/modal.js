@@ -8,6 +8,7 @@ function modal(){
     let nameEdit = document.querySelector(".name-edit")
     let modalInput = document.querySelector(".modal-input")
     let sendButton = document.querySelector(".send-button")
+    let labelImg = document.querySelector(".label-img")
     // console.log(priceList)//
     function text(dataList,value){
         for (let count = 0; count < dataList.length; count++){
@@ -21,6 +22,7 @@ function modal(){
                 modalInput.style.height = "74px"
                 modalInput.style.width = "450px"
                 sendButton.value = data.value + value
+                labelImg.style.display = "none"
             })
         }
         
@@ -33,6 +35,8 @@ function modal(){
         img.addEventListener("click", ()=>{
             background.style.display = "block"
             modal.style.display = "flex"
+            modalInput.id = "img"
+            modalInput.style.display= "none"
             // nameEdit.textContent = "change text"
             // modalInput.type = "text"
             // modalInput.style.borderRadius = "10px"
