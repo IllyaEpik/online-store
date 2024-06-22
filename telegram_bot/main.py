@@ -1,6 +1,7 @@
 import telebot
-from .modules.sqlite import get_data, edit_data, delete_data
+from .modules.sqlite import get_data, edit_data, delete_data, add_data
 import threading
+import os
 
 user_button = telebot.types.InlineKeyboardButton(text= "GET USERS", callback_data="GET")
 product_button1= telebot.types.InlineKeyboardButton(text= "GET PRODUCTS", callback_data="PRODUCT")
@@ -11,22 +12,22 @@ user_keyboard=telebot.types.InlineKeyboardMarkup([[user_button]])
 product_keyboard= telebot.types.InlineKeyboardMarkup([[product_button1,product_button2]])
 product_get_keyboard= telebot.types.InlineKeyboardMarkup([[product_button3]])
 bot = telebot.TeleBot('6669027800:AAH0Cj4rJmqArmz5RAsVd0fMfS9uX-XrIFA')
+stage = {}
 # list_moderators = [{"id": 2036291862, "name": "Illya"}]
 list_id={
     "users":-4288720099,
     "cart":-4212396407,
-    "products":-4277182455
+    "products":-1002206764279
 }
 @bot.message_handler(["start"])
 def start(message: telebot.types.Message):
     # is_moderator = False
     id  = message.chat.id
-    # print(id)
+    print(id)
     if id==list_id["users"]:
         bot.send_message(chat_id=id , text= "Привет користувач" , reply_markup=user_keyboard)
     elif id==list_id["products"]:
         bot.send_message(chat_id=id , text= "Привет користувач" , reply_markup=product_keyboard)
-
     # for moderator in list_moderators:
     #     if moderator["id"]== id:
     #         is_moderator = True
@@ -101,5 +102,68 @@ def product(callback: telebot.types.CallbackQuery):
         text+=f"discount: {product1[5]}\n\n"
         text+=f"description: {product1[2]}\n"
         bot.send_message(chat_id=list_id["products"],text=text,reply_markup=product_get_keyboard)
+def add_production(message:telebot.types.Message):
+    print(message.photo)
+    id = bot.get_me().id
+    stage[id]["messages"].append(message.message_id)
+    if stage[id]["name"] == None:
+        stage[id]["name"] = message.text
+        stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть ціну продукту").message_id)
+    elif stage[id]["price"] == None:
+        stage[id]["price"] = message.text
+        stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть скидку продукту").message_id)
+    elif stage[id]["discount"] == None:
+        stage[id]["discount"] = message.text
+        stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть кількість продукту").message_id)
+    elif stage[id]["count"] == None:
+        stage[id]["count"] = message.text
+        stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть опис продукту").message_id)
+    elif stage[id]["description"] == None:
+        stage[id]["description"] = message.text
+        stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть фото продукту").message_id)
+    else:
+        stage[id]["image"] = message.photo[-1].file_id
+        file=bot.get_file(stage[id]["image"])
+        download_file=bot.download_file(file.file_path)
+        path = os.path.abspath(__file__+f"/../../shop_page/static/image/{stage[id]['name']}.png")
+        with open(path,"wb") as save_file:
+            save_file.write(download_file)
+        add_data(values=(
+            stage[id]["name"],
+            stage[id]["description"],
+            stage[id]["count"],
+            stage[id]["price"],
+            stage[id]["discount"],
+            "256 Гб",
+            "512 Гб",
+            "1 Тб"
+        ))
+        text="Продукт успішно добавлений до бази данних, продукт:\n"
+        text+=f"name: {stage[id]['name']}\n"
+        text+=f"count: {stage[id]['count']}\n"
+        text+=f"price: {stage[id]['price']}\n"
+        text+=f"discount: {stage[id]['discount']}\n"
+        text+=f"description: {stage[id]['description']}\n"
+        # bot.send_message(message.chat.id,)
+        for message1 in stage[id]["messages"]:
+            bot.delete_message(message.chat.id,message1)
+        bot.send_photo(message.chat.id,stage[id]["image"],text)
+    bot.register_next_step_handler(message=message, callback=add_production)
+@bot.callback_query_handler(lambda call: True if call.data=="ADD" else False)
+def add_product(callback: telebot.types.CallbackQuery):
+    id = bot.get_me().id
+   
+    stage[id]={
+        "name":None,
+        "price":None,            
+        "discount":None,
+        "count":None,
+        "description":None,
+        "messages":[]
+        }
+    stage[id]["messages"].append(bot.send_message(list_id["products"],"Укажіть ім'я продукту").message_id)
+    def ok(ok):
+        print('ok')
+    bot.register_next_step_handler(message=callback.message,callback=add_production)
 threading.Thread(target=lambda: bot.infinity_polling(skip_pending=True)).start()
 # bot.infinity_polling()
