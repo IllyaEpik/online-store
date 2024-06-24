@@ -22,11 +22,15 @@ shop page
 <div class="start1">
     
 </div>
+{% if admin %}
 <div class = "add">
     <p class = "addText">Додати продукт<button class = 'editorButton plus'><img  src="{{ url_for('shop.static', filename = '/image/') }}plus.png" class = "plusImg" alt=""></button></p>
-
+</div>
+{% else %}
+<div class="start1">
     
 </div>
+{% endif %}
 {% for product in products %}
     <div class="start">
         <img src="{{ url_for('shop.static', filename = '/image/') }}{{ product.name }}.png" alt="" class="product-img">
@@ -122,7 +126,7 @@ shop page
             {% else %}
                 <div class="deleteForm">
                     <button type="button" class="end" > ✓ </button>
-                    <h4  class="deleteP">Товар в наявності</h4>
+                    <h4  class="count">Товар в наявності</h4>
                 </div>
             {% endif %}
             </div>

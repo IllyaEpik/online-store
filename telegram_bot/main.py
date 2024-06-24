@@ -6,28 +6,34 @@ import os
 user_button = telebot.types.InlineKeyboardButton(text= "GET USERS", callback_data="GET")
 product_button1= telebot.types.InlineKeyboardButton(text= "GET PRODUCTS", callback_data="PRODUCT")
 product_button2= telebot.types.InlineKeyboardButton(text= "ADD PRODUCT", callback_data="ADD")
-product_button3= telebot.types.InlineKeyboardButton(text= "DELETE PRODUCT", callback_data="DELETE_PRODUCT")
 # inline_button4 = telebot.types.InlineKeyboardButton(text= "GET ADMIN", callback_data="ADMIN")
 user_keyboard=telebot.types.InlineKeyboardMarkup([[user_button]])
 product_keyboard= telebot.types.InlineKeyboardMarkup([[product_button1,product_button2]])
-product_get_keyboard= telebot.types.InlineKeyboardMarkup([[product_button3]])
+
 bot = telebot.TeleBot('6669027800:AAH0Cj4rJmqArmz5RAsVd0fMfS9uX-XrIFA')
 stage = {}
 # list_moderators = [{"id": 2036291862, "name": "Illya"}]
 list_id={
-    "users":-4288720099,
-    "cart":-4212396407,
-    "products":-1002206764279
+    "users":4,
+    "cart":9,
+    "products":11
 }
+global_id = -1002210480484
 @bot.message_handler(["start"])
 def start(message: telebot.types.Message):
     # is_moderator = False
     id  = message.chat.id
+    thread_id= message.message_thread_id
     print(id)
-    if id==list_id["users"]:
-        bot.send_message(chat_id=id , text= "Привет користувач" , reply_markup=user_keyboard)
-    elif id==list_id["products"]:
-        bot.send_message(chat_id=id , text= "Привет користувач" , reply_markup=product_keyboard)
+    # bot.send_message(chat_id=global_id , text= f"{thread_id}" )
+    # bot.send_message(chat_id=global_id , text= f"use",message_thread_id=4)
+    # bot.send_message(chat_id=global_id , text= f"pro",message_thread_id=11)    
+    # bot.send_message(chat_id=global_id , text= f"cart",message_thread_id=9)
+    if id == global_id:
+        if thread_id==list_id["users"]:
+            bot.send_message(chat_id=id , text= "Привет користувач" , reply_markup=user_keyboard, message_thread_id=thread_id)
+        elif thread_id==list_id["products"]:
+            bot.send_message(chat_id=id , text= "Привет користувач" , reply_markup=product_keyboard, message_thread_id=thread_id)
     # for moderator in list_moderators:
     #     if moderator["id"]== id:
     #         is_moderator = True
@@ -51,7 +57,7 @@ def start(message: telebot.types.Message):
 #             break  
     
 #     print(callback.message.chat.id)
-@bot.callback_query_handler(lambda call: True if "DELETE" in call.data else False)
+@bot.callback_query_handler(lambda call: True if "DELETE" in call.data and not "P" in call.data  else False)
 def delete(callback: telebot.types.CallbackQuery):
     # data - DELETE_2
     id = callback.data.split("_")[-1]
@@ -72,7 +78,7 @@ def callbacks(callback: telebot.types.CallbackQuery):
         text+= f"Login: {get_data('login')[count][0]}\n"
         text+= f"Password: {get_data('password')[count][0]}\n"
         text += f"Is_admin: {bool(get_data('is_admin')[count][0])}\n"
-        bot.send_message(chat_id=callback.message.chat.id, text=text, reply_markup=inline_keyboard1)
+        bot.send_message(chat_id=callback.message.chat.id, text=text, reply_markup=inline_keyboard1,message_thread_id=list_id["users"])
 
 
 @bot.callback_query_handler(lambda call: True if "GET" in call.data and call.data!= "GET"  or "REMOVE" in call.data else False)
@@ -94,33 +100,39 @@ def admin(callback: telebot.types.CallbackQuery):
 @bot.callback_query_handler(lambda call: True if call.data=="PRODUCT" else False)
 def product(callback: telebot.types.CallbackQuery):
     for count in range(len(get_data("id","product"))):
+
         product1=get_data("*","product")[count]
-        print(product1)
+        print(product1,product1[0])
         text=f"name: {product1[1]}\n"
         text+=f"count: {product1[3]}\n"
         text+=f"price: {product1[4]}\n"
         text+=f"discount: {product1[5]}\n\n"
         text+=f"description: {product1[2]}\n"
-        bot.send_message(chat_id=list_id["products"],text=text,reply_markup=product_get_keyboard)
+        product_button3= telebot.types.InlineKeyboardButton(text= "DELETE PRODUCT", callback_data=f"DELETE_PRODUCT_{product1[0]}")
+        product_get_keyboard= telebot.types.InlineKeyboardMarkup([[product_button3]])
+        # path = 
+        with open(os.path.abspath(__file__ + f"/../../shop_page/static/image/{product1[1]}.png"), "rb") as file:
+            bot.send_photo(global_id,file,text,reply_markup=product_get_keyboard, message_thread_id=list_id["products"])
+        # bot.send_message(chat_id=global_id, message_thread_id=list_id["products"],text=text,reply_markup=product_get_keyboard)
 def add_production(message:telebot.types.Message):
     print(message.photo)
     id = bot.get_me().id
     stage[id]["messages"].append(message.message_id)
     if stage[id]["name"] == None:
         stage[id]["name"] = message.text
-        stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть ціну продукту").message_id)
+        stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть ціну продукту", message_thread_id=list_id["products"]).message_id)
     elif stage[id]["price"] == None:
         stage[id]["price"] = message.text
-        stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть скидку продукту").message_id)
+        stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть скидку продукту", message_thread_id=list_id["products"]).message_id)
     elif stage[id]["discount"] == None:
         stage[id]["discount"] = message.text
-        stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть кількість продукту").message_id)
+        stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть кількість продукту", message_thread_id=list_id["products"]).message_id)
     elif stage[id]["count"] == None:
         stage[id]["count"] = message.text
-        stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть опис продукту").message_id)
+        stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть опис продукту", message_thread_id=list_id["products"]).message_id)
     elif stage[id]["description"] == None:
         stage[id]["description"] = message.text
-        stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть фото продукту").message_id)
+        stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть фото продукту",message_thread_id=list_id["products"]).message_id)
     else:
         stage[id]["image"] = message.photo[-1].file_id
         file=bot.get_file(stage[id]["image"])
@@ -147,7 +159,7 @@ def add_production(message:telebot.types.Message):
         # bot.send_message(message.chat.id,)
         for message1 in stage[id]["messages"]:
             bot.delete_message(message.chat.id,message1)
-        bot.send_photo(message.chat.id,stage[id]["image"],text)
+        bot.send_photo(message.chat.id,stage[id]["image"],text,message_thread_id=list_id["products"])
     bot.register_next_step_handler(message=message, callback=add_production)
 @bot.callback_query_handler(lambda call: True if call.data=="ADD" else False)
 def add_product(callback: telebot.types.CallbackQuery):
@@ -161,9 +173,15 @@ def add_product(callback: telebot.types.CallbackQuery):
         "description":None,
         "messages":[]
         }
-    stage[id]["messages"].append(bot.send_message(list_id["products"],"Укажіть ім'я продукту").message_id)
+    stage[id]["messages"].append(bot.send_message(global_id,"Укажіть ім'я продукту",message_thread_id=list_id["products"]).message_id)
     def ok(ok):
         print('ok')
     bot.register_next_step_handler(message=callback.message,callback=add_production)
 threading.Thread(target=lambda: bot.infinity_polling(skip_pending=True)).start()
+@bot.callback_query_handler(lambda call: True if "DELETE_PRODUCT" in call.data else False)
+def delete_product(callback: telebot.types.CallbackQuery):
+    print(callback.data)
+    id = callback.data.split("_")[-1]
+    delete_data(id=id,table="product")
+    bot.delete_message(chat_id=callback.message.chat.id, message_id= callback.message.message_id)
 # bot.infinity_polling()

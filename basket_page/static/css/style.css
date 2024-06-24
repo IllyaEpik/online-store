@@ -425,7 +425,7 @@ color: #000000;
 /* flex-grow: 0; */
 
 }
-form{
+.forms{
     position: absolute;
     left: 1250px;
     top: 200px;
@@ -444,4 +444,110 @@ form{
     position: absolute;
     left: 250px;
     top: 155px;
+}
+.background{
+    background: rgba(255, 255, 255, 0.7);
+    max-width: 100000000000000000000000000000000000px;
+    max-height: 100000000000000000000000000000000000px;
+    height: max-content;
+    width: max-content;
+    z-index: 2;
+    position: absolute;
+}
+form{
+    justify-content: center;
+    position: fixed;
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    position: fixed;
+    top: 5%;
+    left: 32%;
+    /* margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    isolation: isolate;
+    
+    width: 600px;
+    height: 800px;
+    
+    background: #FFFFFF;
+    border: 3px solid #000000;
+    border-radius: 25px;
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    z-index: 5;
+}
+.data{
+    position: block;
+    width: 400px;
+}
+input{
+    width: 122px;
+height: 22px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 240px;
+line-height: 29px;
+/* display: flex;
+align-items: center;
+text-align: center; */
+text-transform: uppercase;
+
+color: #000000;
+
+    /* Frame 37 */
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 10px;
+    gap: 10px;
+    
+    /* position: absolute; */
+    width: 500px;
+    height: 75px;
+    left: 115.5px;
+    top: 139.25px;
+    
+    border: 2px solid #000000;
+    border-radius: 15px;
+    /* Frame 38 */
+    
+    box-sizing: border-box;
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1px 31px;
+    gap: 10px;
+    
+    width: 241px;
+    height: 55px;
+    
+    /* background: #D1D8DB; */
+    border: 1px solid #000000;
+    border-radius: 10px;
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
 }

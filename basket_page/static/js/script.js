@@ -1,3 +1,5 @@
+import modal from "./modules/modal.js"
+modal()
 let plusButtons = document.querySelectorAll(".edit2")
 let minusButtons = document.getElementsByClassName("edit1")
 let countText = document.querySelectorAll("#count")
@@ -95,8 +97,8 @@ destroy()
 
 
 function counting (id){
-    // console.log(id)
-    let text = countText[id-1]
+    console.log(countText,id)
+    let text = countText[id -1]
     let cookie = document.cookie.split("=")[1].split(" ")
     document.querySelector("#message").textContent = `${cookie.length}`
     let count1 = 0
@@ -107,7 +109,7 @@ function counting (id){
             count1++
         }
     }
-    
+    console.log(count1)
     text.textContent = `${count1}`
     destroy()
 }

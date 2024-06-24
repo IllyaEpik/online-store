@@ -4,7 +4,7 @@ Cart page
 {% endblock %}
 {% block head %}
     <link rel="stylesheet" href="{{ url_for('basket.static', filename = '/css/style.css') }}">
-    <script src="{{ url_for('basket.static', filename = '/js/script.js') }}" defer></script>
+    <script src="{{ url_for('basket.static', filename = '/js/script.js') }}" defer type="module"></script>
 {% endblock %}
 {% block content %}
 
@@ -37,7 +37,7 @@ Cart page
         </div>
     </div>
 {% endfor %}
-<form action="">
+<div class="forms">
     
     <button class="form">Перейти до оформлення</button>
     <h3 class = "count-products">0-и товари на сумму</h3>
@@ -46,5 +46,26 @@ Cart page
     <h3 class = "discount">0 грн</h3>
     <h2>Загальна сумма</h2>
     <h3 class = "all-price">133 997 грн</h3>
-</form>
+</div>
+<div class="modal" style="display: none;">
+    <form action="" method="post">
+        <h1>Оформлення замовлення</h1>
+        <h2 class="data">Ім'я</h2>
+        <input type="text" name="name" required>
+        <h2 class="data">Прізвище</h2>
+        <input type="text" name="surname" required>
+        <h2 class="data">Телефон замовника</h2>
+        <input type="text" name="phone" required>
+        <h2 class="data">Email замовника</h2>
+        <input type="text" name="email" required>
+        <h2 class="data">Місто отримувача</h2>
+        <input type="text" name="city" required>
+        <h2 class="data">Відділеня нової пошти</h2>
+        <input type="text" name="post" required>
+        <h2 class="data">Додаткові побажання</h2>
+        <input type="text" name="add">
+        <button type="submit">Send</button>
+    </form>
+    <div class="background"></div>
+</div>
 {% endblock %}

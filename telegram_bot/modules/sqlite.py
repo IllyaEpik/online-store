@@ -38,6 +38,6 @@ def delete_data(id = 2, table = "user"):
     cursor.execute(f'DELETE FROM {table} WHERE id = {id}')
     db.commit()
     # counter()
-    db.commit()
+    # db.commit()
     db.close()
 print(get_data(columns="id",table="product"))
