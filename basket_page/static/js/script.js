@@ -97,8 +97,16 @@ destroy()
 
 
 function counting (id){
+    let list_id = document.querySelectorAll(".start")
+    let count_id = 0
+    for (let count = 0; count < list_id.length; count++ ){
+        if (list_id[count].id == id){
+            count_id = count
+        }
+    }
+        
     console.log(countText,id)
-    let text = countText[id -1]
+    let text = countText[count_id]
     let cookie = document.cookie.split("=")[1].split(" ")
     document.querySelector("#message").textContent = `${cookie.length}`
     let count1 = 0

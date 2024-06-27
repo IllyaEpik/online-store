@@ -489,65 +489,82 @@ form{
     z-index: 5;
 }
 .data{
-    position: block;
-    width: 400px;
-}
-input{
-    width: 122px;
-height: 22px;
+/* відділення нової пошти: */
+
+width: 450px;
+height: 24px;
 
 font-family: 'Inter';
 font-style: normal;
-font-weight: 700;
-font-size: 240px;
-line-height: 29px;
-/* display: flex;
+font-weight: 400;
+font-size: 20px;
+line-height: 24px;
+display: flex;
 align-items: center;
-text-align: center; */
+text-transform: uppercase;
+margin: 0px;
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+}
+.get-data{
+/* Frame 37 */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+/* justify-content: flex-end; */
+/* align-items: flex-end; */
+padding: 10px;
+/* isolation: isolate; */
+
+width: 450px;
+height: 60px;
+
+border: 2px solid #000000;
+border-radius: 15px;
+
+/* Inside auto layout */
+/* flex: none;
+order: 1;
+flex-grow: 0; */
+
+}
+
+    /* iPhone 15 Pro Max 256GB Natural Titanium */
+
+/* width: 500px; */
+.submit{
+    /* SEND */
+
+/* width: 446px;
+height: 51px; */
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 25px;
+line-height: 30px;
+display: flex;
+align-items: center;
+text-align: center;
+text-decoration-line: underline;
 text-transform: uppercase;
 
 color: #000000;
 
-    /* Frame 37 */
 
-    box-sizing: border-box;
-
-    /* Auto layout */
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 10px;
-    gap: 10px;
-    
-    /* position: absolute; */
-    width: 500px;
-    height: 75px;
-    left: 115.5px;
-    top: 139.25px;
-    
-    border: 2px solid #000000;
-    border-radius: 15px;
-    /* Frame 38 */
-    
-    box-sizing: border-box;
-    
-    /* Auto layout */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 1px 31px;
-    gap: 10px;
-    
-    width: 241px;
-    height: 55px;
-    
-    /* background: #D1D8DB; */
-    border: 1px solid #000000;
-    border-radius: 10px;
-    
-    /* Inside auto layout */
-    flex: none;
-    order: 0;
-    flex-grow: 0;
+/* Inside auto layout */
+/* flex: none; */
+/* order: 8; */
+/* flex-grow: 0; */
+background: none;
+border: 0px;
 }

@@ -17,6 +17,10 @@ Cart page
     <a id="contacts" href="/contacts/">CONTACTS</a>
     <p id="end">{{ name }}</p>
 </div>
+{% if send %}
+<h1>Ваші дані у обробці 
+    консультант зв’яжеться з вами для підтвердження замовлення</h1>
+{% endif %}
 <div class="message"><p id="message">{{count}}</p></div>
 <h1 id="empty">cart empty</h1>
 {% for product in products %}
@@ -49,22 +53,23 @@ Cart page
 </div>
 <div class="modal" style="display: none;">
     <form action="" method="post">
-        <h1>Оформлення замовлення</h1>
+        <h1>оформлення замовлення</h1>
         <h2 class="data">Ім'я</h2>
-        <input type="text" name="name" required>
+        <input type="text" name="name" required class="get-data">
         <h2 class="data">Прізвище</h2>
-        <input type="text" name="surname" required>
+        <input type="text" name="surname" required class="get-data">
         <h2 class="data">Телефон замовника</h2>
-        <input type="text" name="phone" required>
+        <input type="text" name="phone" required class="get-data">
         <h2 class="data">Email замовника</h2>
-        <input type="text" name="email" required>
+        <input type="text" name="email" required class="get-data">
         <h2 class="data">Місто отримувача</h2>
-        <input type="text" name="city" required>
+        <input type="text" name="city" required class="get-data">
         <h2 class="data">Відділеня нової пошти</h2>
-        <input type="text" name="post" required>
+        <input type="text" name="post" required class="get-data">
         <h2 class="data">Додаткові побажання</h2>
-        <input type="text" name="add">
-        <button type="submit">Send</button>
+        <Textarea type="text" name="add" class="get-data"></Textarea>
+        <!-- <input type="text" name="add"> -->
+        <button type="submit" class="submit" name="submit" value="">Send</button>
     </form>
     <div class="background"></div>
 </div>

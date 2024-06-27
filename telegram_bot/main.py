@@ -6,9 +6,11 @@ import os
 user_button = telebot.types.InlineKeyboardButton(text= "GET USERS", callback_data="GET")
 product_button1= telebot.types.InlineKeyboardButton(text= "GET PRODUCTS", callback_data="PRODUCT")
 product_button2= telebot.types.InlineKeyboardButton(text= "ADD PRODUCT", callback_data="ADD")
+cart_button = telebot.types.InlineKeyboardButton(text= "GET USER", callback_data="cart")
 # inline_button4 = telebot.types.InlineKeyboardButton(text= "GET ADMIN", callback_data="ADMIN")
 user_keyboard=telebot.types.InlineKeyboardMarkup([[user_button]])
 product_keyboard= telebot.types.InlineKeyboardMarkup([[product_button1,product_button2]])
+cart_keyboard = telebot.types.InlineKeyboardMarkup([[cart_button]])
 
 bot = telebot.TeleBot('6669027800:AAH0Cj4rJmqArmz5RAsVd0fMfS9uX-XrIFA')
 stage = {}
@@ -115,52 +117,64 @@ def product(callback: telebot.types.CallbackQuery):
             bot.send_photo(global_id,file,text,reply_markup=product_get_keyboard, message_thread_id=list_id["products"])
         # bot.send_message(chat_id=global_id, message_thread_id=list_id["products"],text=text,reply_markup=product_get_keyboard)
 def add_production(message:telebot.types.Message):
-    print(message.photo)
     id = bot.get_me().id
-    stage[id]["messages"].append(message.message_id)
-    if stage[id]["name"] == None:
-        stage[id]["name"] = message.text
-        stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть ціну продукту", message_thread_id=list_id["products"]).message_id)
-    elif stage[id]["price"] == None:
-        stage[id]["price"] = message.text
-        stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть скидку продукту", message_thread_id=list_id["products"]).message_id)
-    elif stage[id]["discount"] == None:
-        stage[id]["discount"] = message.text
-        stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть кількість продукту", message_thread_id=list_id["products"]).message_id)
-    elif stage[id]["count"] == None:
-        stage[id]["count"] = message.text
-        stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть опис продукту", message_thread_id=list_id["products"]).message_id)
-    elif stage[id]["description"] == None:
-        stage[id]["description"] = message.text
-        stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть фото продукту",message_thread_id=list_id["products"]).message_id)
-    else:
-        stage[id]["image"] = message.photo[-1].file_id
-        file=bot.get_file(stage[id]["image"])
-        download_file=bot.download_file(file.file_path)
-        path = os.path.abspath(__file__+f"/../../shop_page/static/image/{stage[id]['name']}.png")
-        with open(path,"wb") as save_file:
-            save_file.write(download_file)
-        add_data(values=(
-            stage[id]["name"],
-            stage[id]["description"],
-            stage[id]["count"],
-            stage[id]["price"],
-            stage[id]["discount"],
-            "256 Гб",
-            "512 Гб",
-            "1 Тб"
-        ))
-        text="Продукт успішно добавлений до бази данних, продукт:\n"
-        text+=f"name: {stage[id]['name']}\n"
-        text+=f"count: {stage[id]['count']}\n"
-        text+=f"price: {stage[id]['price']}\n"
-        text+=f"discount: {stage[id]['discount']}\n"
-        text+=f"description: {stage[id]['description']}\n"
-        # bot.send_message(message.chat.id,)
-        for message1 in stage[id]["messages"]:
-            bot.delete_message(message.chat.id,message1)
-        bot.send_photo(message.chat.id,stage[id]["image"],text,message_thread_id=list_id["products"])
-    bot.register_next_step_handler(message=message, callback=add_production)
+    old_data=stage[id]
+    try:
+        
+        stage[id]["messages"].append(message.message_id)
+        if stage[id]["name"] == None:
+            stage[id]["name"] = message.text
+            stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть ціну продукту", message_thread_id=list_id["products"]).message_id)
+        elif stage[id]["price"] == None:
+            stage[id]["price"] = int(message.text)
+            stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть скидку продукту", message_thread_id=list_id["products"]).message_id)
+        elif stage[id]["discount"] == None:
+            stage[id]["discount"] = int(message.text)
+            stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть кількість продукту", message_thread_id=list_id["products"]).message_id)
+        elif stage[id]["count"] == None :
+            stage[id]["count"] = int(message.text)
+            stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть опис продукту", message_thread_id=list_id["products"]).message_id)
+        elif stage[id]["description"] == None:
+            stage[id]["description"] = message.text
+            stage[id]["messages"].append(bot.send_message(message.chat.id,"Укажіть фото продукту",message_thread_id=list_id["products"]).message_id)
+        else:
+            stage[id]["image"] = message.photo[-1].file_id
+            file=bot.get_file(stage[id]["image"])
+            download_file=bot.download_file(file.file_path)
+            path = os.path.abspath(__file__+f"/../../shop_page/static/image/{stage[id]['name']}.png")
+            with open(path,"wb") as save_file:
+                save_file.write(download_file)
+            add_data(values=(
+                stage[id]["name"],
+                stage[id]["description"],
+                stage[id]["count"],
+                stage[id]["price"],
+                stage[id]["discount"],
+                "256 Гб",
+                "512 Гб",
+                "1 Тб"
+            ))
+            text="Продукт успішно добавлений до бази данних, продукт:\n"
+            text+=f"name: {stage[id]['name']}\n"
+            text+=f"count: {stage[id]['count']}\n"
+            text+=f"price: {stage[id]['price']}\n"
+            text+=f"discount: {stage[id]['discount']}\n"
+            text+=f"description: {stage[id]['description']}\n"
+            # bot.send_message(message.chat.id,)
+            for message1 in stage[id]["messages"]:
+                try:
+                    bot.delete_message(message.chat.id,message1)
+                except:
+                    pass
+            bot.send_photo(message.chat.id,stage[id]["image"],text,message_thread_id=list_id["products"])
+        bot.register_next_step_handler(message=message, callback=add_production)
+    except Exception as error:
+        print(stage[id],error)
+        stage[id]["messages"].append(bot.send_message(message.chat.id,"Виникла помилка можливо ви неправильно вказали данні",message_thread_id=list_id["products"]).message_id)
+        bot.register_next_step_handler(message=message, callback=add_production)
+        stage[id]["price"]=None
+        stage[id]["count"]=None
+        stage[id]["discount"]=None
 @bot.callback_query_handler(lambda call: True if call.data=="ADD" else False)
 def add_product(callback: telebot.types.CallbackQuery):
     id = bot.get_me().id
@@ -177,11 +191,16 @@ def add_product(callback: telebot.types.CallbackQuery):
     def ok(ok):
         print('ok')
     bot.register_next_step_handler(message=callback.message,callback=add_production)
-threading.Thread(target=lambda: bot.infinity_polling(skip_pending=True)).start()
 @bot.callback_query_handler(lambda call: True if "DELETE_PRODUCT" in call.data else False)
 def delete_product(callback: telebot.types.CallbackQuery):
     print(callback.data)
     id = callback.data.split("_")[-1]
     delete_data(id=id,table="product")
     bot.delete_message(chat_id=callback.message.chat.id, message_id= callback.message.message_id)
+@bot.callback_query_handler(lambda call: True if "cart" == call.data else False)
+def get_user(callback: telebot.types.CallbackQuery):
+    print(callback.from_user.username)
+    bot.send_message(callback.from_user.id,callback.message.text)
+    bot.delete_message(chat_id=callback.message.chat.id, message_id= callback.message.message_id)
 # bot.infinity_polling()
+threading.Thread(target=lambda: bot.infinity_polling(skip_pending=True)).start()
