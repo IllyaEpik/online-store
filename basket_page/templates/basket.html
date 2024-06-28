@@ -18,7 +18,7 @@ Cart page
     <p id="end">{{ name }}</p>
 </div>
 {% if send %}
-<h1>Ваші дані у обробці 
+<h1 class="oformed">Ваші дані у обробці 
     консультант зв’яжеться з вами для підтвердження замовлення</h1>
 {% endif %}
 <div class="message"><p id="message">{{count}}</p></div>
@@ -26,14 +26,22 @@ Cart page
 {% for product in products %}
 
     <div class="start" id="{{product.id}}">
-        <img src="{{ url_for('shop.static', filename = '/image/') }}{{ product.name }}.png" alt="">
+        <img src="{{ url_for('shop.static', filename = '/image/') }}{{ product.name }}.png" class="img-product" alt="">
         <div class="border">
-            <p>{{ product.name }}</p>  
+            <p class="product-name">{{ product.name }}</p>  
+            {% if not send %}
             <div class="edit">
                 <button id="{{product.id}}" class="edit1">-</button>
                 <h2 id="count">0</h2>
                 <button id="{{product.id}}" class="edit2">+</button>
             </div>
+            {% else %}
+            <div class="edit">
+                
+                <h2 id="count">0</h2>
+                
+            </div>
+            {% endif %}
             <div class="price-div">
                 <h2 id="{{ product.price }}" class="price-h2">{{ product.price }}</h2>
                 <h3 id="{{ product.discount }}" class="price-h3">грн</h3>
@@ -41,6 +49,7 @@ Cart page
         </div>
     </div>
 {% endfor %}
+{% if not send %}
 <div class="forms">
     
     <button class="form">Перейти до оформлення</button>
@@ -51,6 +60,19 @@ Cart page
     <h2>Загальна сумма</h2>
     <h3 class = "all-price">133 997 грн</h3>
 </div>
+{% else %}
+<!-- <footer> -->
+
+    <div class="after-form">
+        <div style="text-align: center;">
+            <h2 class="price-name">Загальна вартість замовлення: <span class = "all-price" style="position: unset;"></span></h2>
+            <!-- <h3 >133 997 грн</h3> -->
+        </div>
+        
+        <button class="form">Відмінити замовлення</button>
+    </div>
+<!-- </footer> -->
+{% endif %}
 <div class="modal" style="display: none;">
     <form action="" method="post">
         <h1>оформлення замовлення</h1>

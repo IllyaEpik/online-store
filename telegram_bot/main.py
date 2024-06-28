@@ -1,5 +1,8 @@
 import telebot
-from .modules.sqlite import get_data, edit_data, delete_data, add_data
+try:
+    from .modules.sqlite import get_data, edit_data, delete_data, add_data
+except:
+    from modules.sqlite import get_data, edit_data, delete_data, add_data
 import threading
 import os
 

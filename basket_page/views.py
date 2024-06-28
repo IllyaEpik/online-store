@@ -1,37 +1,44 @@
 import flask
 import flask_login
-from registration_page.models import User, Product
+from registration_page.models import Cart, Product
 import os
-import telegram_bot
+
 import pandas
 from project.settings import DATABASE
 def render_basket_page():
     send=False
-    dict_products={}
     if flask.request.method == "POST":
-
-        text=f"До вас звернувся користувач сайту:\n"
-        text+= f"ім'я: {flask.request.form['name']}\n"
-        text+= f"призвище: {flask.request.form['surname']}\n"
-        text+= f"номер телефону: {flask.request.form['phone']}\n"
-        text+= f"електрона пошта: {flask.request.form['email']}\n"
-        text+= f"місто отримувача: {flask.request.form['city']}\n"
-        text+= f"Відділення нової почти: {flask.request.form['post']}\n"
-        text+= f"додаткові побажання: {flask.request.form['add']}\n"
-        # name=flask.request.form["name"] {flask.request.form['name']} {flask.request.form['surname']}
-        # surname=flask.request.form["surname"]
-        phone=flask.request.form["phone"]
-        email=flask.request.form["email"]
-        city=flask.request.form["city"]
-        post=flask.request.form["post"]
-        add=flask.request.form["add"]
-        telegram_bot.bot.send_message(
-            telegram_bot.global_id,
-            text=text,
-            message_thread_id=telegram_bot.list_id["cart"],
-            reply_markup=telegram_bot.cart_keyboard
+        try:
+            import telegram_bot
+            text=f"До вас звернувся користувач сайту:\n"
+            text+= f"ім'я: {flask.request.form['name']}\n"
+            text+= f"призвище: {flask.request.form['surname']}\n"
+            text+= f"номер телефону: {flask.request.form['phone']}\n"
+            text+= f"електрона пошта: {flask.request.form['email']}\n"
+            text+= f"місто отримувача: {flask.request.form['city']}\n"
+            text+= f"Відділення нової почти: {flask.request.form['post']}\n"
+            text+= f"додаткові побажання: {flask.request.form['add']}\n"
+            # name=flask.request.form["name"] {flask.request.form['name']} {flask.request.form['surname']}
+            # surname=flask.request.form["surname"]
+            phone=flask.request.form["phone"]
+            email=flask.request.form["email"]
+            city=flask.request.form["city"]
+            post=flask.request.form["post"]
+            add=flask.request.form["add"]
+            telegram_bot.bot.send_message(
+                telegram_bot.global_id,
+                text=text,
+                message_thread_id=telegram_bot.list_id["cart"],
+                reply_markup=telegram_bot.cart_keyboard
+                )
+            send=True
+            cart = Cart(
+                user_id = flask_login.current_user,
+                list_products = flask.request.cookies.get('products')
             )
-        send=True
+        except:
+            pass
+        
     try:
         count =  flask.request.cookies.get('products').split(" ") # python + flask get
     except:

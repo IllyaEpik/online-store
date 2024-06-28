@@ -1,5 +1,6 @@
+# імпортуємо модуль flask
 import flask 
-
+# створюємо blueprint для basket_page
 basket= flask.Blueprint(
     name="basket",
     import_name="app",

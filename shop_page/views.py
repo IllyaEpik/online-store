@@ -1,11 +1,9 @@
 import flask
 import flask_login
 import os
-import pandas
 from project.settings import DATABASE
 from registration_page.models import User, Product
 from .app import shop
-from PIL import Image
 dict_types={
     "IMG":"IMG",
     "NAME":"TEXT",
@@ -143,23 +141,23 @@ def render_shop_page():
     # if flask.request.method == "POST":
         # count = str(int(count) + 1)
     print(Product)
-    if len(Product.query.all()) == 0:
-        path_excel=os.path.abspath(__file__ + "/../static/xlsx/Product.xlsx")
-        read_excel = pandas.read_excel(io=path_excel,header=None,names=["name", "description","count","price","discount"])
-        for row in read_excel.iterrows():
-            row_excel = row[1]
-            product  = Product(
-                name= row_excel["name"],
-                description =row_excel["description"],
-                count = row_excel["count"],
-                price = row_excel["price"],
-                discount = row_excel["discount"],
-                capacity1 = "256 Гб",
-                capacity2 = "512 Гб",
-                capacity3 = "1 Тб"
-            )
-            DATABASE.session.add(product)
-        DATABASE.session.commit()
+    # if len(Product.query.all()) == 0:
+    #     path_excel=os.path.abspath(__file__ + "/../static/xlsx/Product.xlsx")
+    #     read_excel = pandas.read_excel(io=path_excel,header=None,names=["name", "description","count","price","discount"])
+    #     for row in read_excel.iterrows():
+    #         row_excel = row[1]
+    #         product  = Product(
+    #             name= row_excel["name"],
+    #             description =row_excel["description"],
+    #             count = row_excel["count"],
+    #             price = row_excel["price"],
+    #             discount = row_excel["discount"],
+    #             capacity1 = "256 Гб",
+    #             capacity2 = "512 Гб",
+    #             capacity3 = "1 Тб"
+    #         )
+    #         DATABASE.session.add(product)
+    #     DATABASE.session.commit()
             
     # products = {
         

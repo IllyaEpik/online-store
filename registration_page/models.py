@@ -18,6 +18,14 @@ class Product(DATABASE.Model, flask_login.UserMixin):
     discount = DATABASE.Column(DATABASE.Integer)
     capacity1 = DATABASE.Column(DATABASE.String(10), nullable = False)
     capacity2 = DATABASE.Column(DATABASE.String(10), nullable = False)
-    capacity3 = DATABASE.Column(DATABASE.String(10), nullable =False )
+    capacity3 = DATABASE.Column(DATABASE.String(10), nullable = False)
     def __repr__(self) -> str:
         return f"id - {self.id}"
+class Cart(DATABASE.Model):
+    id = DATABASE.Column(DATABASE.Integer, primary_key = True)
+    user_id = DATABASE.Column(DATABASE.Integer, primary_key = True)
+    list_products = DATABASE.Column(DATABASE.Text)
+    message_id = DATABASE.Column(DATABASE.Integer)
+    chat_id = DATABASE.Column(DATABASE.Integer)
+    def __repr__(self) -> str:
+        return f"name - {self.name}"
