@@ -37,7 +37,44 @@ def delete_data(id = 2, table = "user"):
     cursor = db.cursor()
     cursor.execute(f'DELETE FROM {table} WHERE id = {id}')
     db.commit()
-    # counter()
-    # db.commit()
     db.close()
+def add_column(name_column,type_column,name_table="user"):
+    db = sqlite3.connect(database= path)
+    cursor = db.cursor()
+    try:
+        cursor.execute(f"ALTER TABLE {name_table} ADD COLUMN {name_column} {type_column}")
+        db.commit()
+        db.close()
+        return "execute"
+    except:
+        print("Error column")
+        return "Error"
+# def add()
+# def create_tables():
+#     db = sqlite3.connect(database= path)
+#     cursor = db.cursor()
+#     cursor.execute(f"CREATE TABLE IF NOT EXISTS user (INTEGER PRIMARY KEY,id)")
+#     # ,login,email,password,is_admin
+#     add_column('login','TEXT')
+#     add_column('email','TEXT')
+#     add_column('password','TEXT')
+#     add_column("is_admin","INTEGER")
+#     cursor.execute(f"CREATE TABLE IF NOT EXISTS product (INTEGER PRIMARY KEY,id)")
+#     add_column('name','TEXT','product')
+#     add_column('description','TEXT','product')
+#     add_column('count','INTEGER','product')
+#     add_column('discount','INTEGER','product')
+#     add_column('price','INTEGER','product')
+#     add_column('capacity1','TEXT','product')
+#     add_column('capacity2','TEXT','product')
+#     add_column('capacity3','TEXT','product')
+#     # ,name,description,count,price,discount,
+#     cursor.execute(f"CREATE TABLE IF NOT EXISTS cart ()")
+#     add_column('user_id','INTEGER','cart')
+#     add_column('list_products','TEXT','cart')
+#     add_column('message_id','INTEGER','cart')
+#     add_column('chat_id','INTEGER','cart')
+#     db.commit()
+#     db.close()
+# create_tables()
 print(get_data(columns="id",table="product"))

@@ -4,16 +4,19 @@
 * [Марк Попович / Mark Popovch](https://github.com/markpopovich9/online-store)
 * [Кирило Харлан / Kyrylo Kharlan](https://github.com/KirillKharlan/online-store)
 
-## Назва проекту: Онлайн-магазин
-## name project: Online store
+## Назва проекту: Онлайн-магазин / name project: Online store
 #### description:
-
+  - This app is used to sell and buy products
 #### опис:
-
-###### Додати інтерактивну демоверсію проекту. 
-
-###### 3. Чому проект корисений.🔘 Що саме корисного несе ваш проект для оточуючих, особливо для вас як для новачків у цьому напрямку. Не забуваємо, що ваш проект має всі необхідні можливості для створення повноцінного вебсайту для замовника. 
-
+  - Цей додаток використовується для продажу та купівлі продуктів
+###### інтерактивна демоверсія проекту:
+<video controls src="2024-06-28 20-47-37.mp4" title="demoVersion"></video>
+###### Чому проект корисений. Що саме корисного несе ваш проект для оточуючих, особливо для вас як для новачків у цьому напрямку:
+  - Він корисний тим що удобний для використання і він корисний тим що він готовий для заробітку грошей
+###### Why the project is used. What exactly is your project useful for others, especially for you as a beginner in this direction:
+ - It is useful because it is convenient to use and it is useful because it is ready for earning money
+------
+#### Список модулей необхідних для завантаження:
 1. flask; обов'язковий для роботи веб сайту / required for website operation
 2. flask_login; потрібен для того, щоб користувач міг зайти під акаунтом / needed so that the user can log in to the account
 3. telebot; потрібен для роботи телеграм бота / needed for telegram bot to work
@@ -28,13 +31,67 @@
 3. натискаємо на зелену кнопку "код" після натискаємо на кнопку "завантажити zip" / click on the green “code” button and then click on the “download zip” button
 4. ![alt text](image.png) 
 5. після цих дій розархівуємо zip файл у потрібну вам папку та запускаємо manage.py / After these steps, unzip the zip file into the folder you need and run manage.py 
-## інструкція із запуску на pythonAnyWhere / instructions for running on pythonAnyWhere:
-###### none
+## інструкція із запуску на pythonAnyWhere:
+1. Запам'ятайте для переміщення між папками в консолі використовується cd назва папки
+2. Відкрийте консоль в pythonAnyWhere
+3. Придумайте назву віртуальної середи
+4. Надрукуйте ```mkvitualenv (назва віртуальної середи)``` в консолі
+5. Надрукуйте ```source .virtualenvs/(назва віртуальної середи)/bin/activate``` в консолі
+6. Завантажте всі потрібні модулі через pip install
+7. Перейдіть в потрібну папку в якій ви хочете завантажити додаток в консолі
+8. Надрукуйте ```git clone https://github.com/IllyaEpik/online-store``` в консолі
+9. Надрукуйте ```cd mysite/(назва віртуальної середи)/project``` в консолі
+10. Надрукуйте ```flask --app settings db init``` в консолі
+11. Надрукуйте ```flask --app settings db migrate``` в консолі
+12. Надрукуйте ```flask --app settings db upgrade``` в консолі
+13. Перейдіть в розділ **Web**
+14. Пролистайте до **Source code** та додайте ```/mysite/online-store``` до того що там вже є
+15. Зробіть з **Working directory** та надрукуйте те саме що в **Source code** 
+16. WSGI configuration file: натискайте на ссилку
+17.  після цього напишите в 16 строчці: ```from project import shop as application```
+18.  натиснiть на зелену кнопочку: ![alt text](image-1.png)
+19.  тепер поверніться назад 
+20.  перегортайте на вверх до 
+21.  ![alt text](image-2.png)
+22. нажміть на зелену кнопочку reload
+23. натисніть на синій текст
+    
+## instructions for running on pythonAnyWhere:
+1. Remember to move between folders in the console using cd folder name
+2. Open the console in pythonAnyWhere
+3. Come up with a name for the virtual environment
+4. Type ```mkvitualenv (virtual environment name)'' in the console
+5. Type ```source .virtualenvs/(virtual environment name)/bin/activate''' in the console
+6. Download all required modules via pip install
+7. Go to the desired folder in which you want to download the application in the console
+8. Type ```git clone https://github.com/IllyaEpik/online-store''' in the console
+9. Type ```cd mysite/(virtual environment name)/project''' in the console
+10. Type ``flask --app settings db init'' in the console
+11. Type ``flask --app settings db migrate'' in the console
+12. Type ``flask --app settings db upgrade'' in the console
+13. Go to the **Web** section
+14. Browse to **Source code** and add ```/mysite/online-store''' to what is already there
+15. Make from **Working directory** and print the same as in **Source code**
+16. WSGI configuration file: click on the link
+17. after that, write in line 16: ```from project import shop as application''
+18. click on the green button: ![alt text](image-1.png)
+19. now go back
+20. scroll up to
+21. ![alt text](image-2.png)
+22. click on the green reload button
+23. click on the blue text
 
 # структура проекту / project structure:
+* домашня сторінка - є головною сторінкою сайту
+* сторінка реєстрації - потрібна для того щоб коритувач міг зареєструватись
+* сторінка авторизації - потрібна для того щоб коритувач міг авторизуватись
+* сторінка магазину - потрібна для того щоб коритувач міг додати до тележки  товар який він хоче,а також використовується адміністрацією для зміну товару 
+* сторінка тележки - потрібна щоб користувач міг купити товар який є в тележці
+* сторінка контактів - ???
 
-+ project/settings.py
-+ опис / description: приклад створення головного додатку / an example of creating a main application
+
+#### project/settings.py: приклад створення головного додатку / an example of creating a main application:
+  
 ```python
 # імпортуємо модуль flask
 import flask 
@@ -66,7 +123,7 @@ reg =  flask.Blueprint(
 ```
 ## посіб налаштування Blueprint у файлі urls
 + project/urls.py
-+ опис / description: none
++ опис / description: активує сторінки сайту / activates the site pages
 ```python
 import basket_page.app
 import basket_page.views
@@ -571,10 +628,15 @@ Cart page
 + login_page/views.py 
 + опис / description: none 
 ```python
+# імпортуємо flask
 import flask 
+#імпортуємо flask_login
 import flask_login
+# імпортуємо class User з models
 from registration_page.models import User
+# імпортуємо render_home_page з views
 from home_page.views import render_home_page
+# створюємо функцію render_login_page
 def render_login_page():
     
     code=False
@@ -588,15 +650,17 @@ def render_login_page():
                 if user.password == flask.request.form['password']:
                     flask_login.login_user(user)
                     code=False
+                    # возвращаемо код html сторінки home_page
                     return flask.redirect('/')
             if  code:
                 for user in User.query.filter_by(email=flask.request.form['login']):
                     if user.password == flask.request.form['password']:
                         flask_login.login_user(user)
                         code = False
+                        # возвращаемо код html сторінки home_page
                         return flask.redirect('/')
             
-
+    # возвращаемо код html сторінки 
     return flask.render_template(
         template_name_or_list= "login.html",
         code=code
@@ -606,10 +670,15 @@ def render_login_page():
 + shop_page/views.py
 + опис / description: none
 ```python
+# імпортуємо flask
 import flask
+# імпортуємо flask_login
 import flask_login
+# імпортуємо os
 import os
+# імпортуємо DATABASE з project
 from project.settings import DATABASE
+# імпортуємо class Product з models
 from registration_page.models import Product
 dict_types={
     "IMG":"IMG",
@@ -617,6 +686,7 @@ dict_types={
     "PRICE":"INT",
     "DISCOUNT": "INT"
 }
+# створюємо функцію render_shop_page
 def render_shop_page():
     mod = False
     type1 = None
@@ -658,6 +728,8 @@ def render_shop_page():
                         Product.query.get(id).price = text
                     if type1 == "DISCOUNT":
                         Product.query.get(id).discount = text
+                        DATABASE.session.commit()
+                        DATABASE.session.commit()
         except Exception as Error:
             print(Error)
             try:
@@ -699,7 +771,9 @@ def render_shop_page():
             count = "0"
     except:
         count = "0"
+    DATABASE.session.commit()
     admin=flask_login.current_user.is_admin
+    # возвращаемо код html сторінки
     cookie = flask.make_response(
         flask.render_template(template_name_or_list="shop.html",
                               name=flask_login.current_user.login, 
@@ -718,11 +792,17 @@ def render_shop_page():
 + basket_page/views.py 
 + опис / description: none
 ```python
+# імпортуємо flask
 import flask
+# імпортуємо flask_login
 import flask_login
-from registration_page.models import Cart, Product
+# імпортуємо class Product Cart User з models
+from registration_page.models import Cart, Product, User
+# імпортуємо Message з flask_mail
 from flask_mail import Message
+# імпортуємо mail, ADMINISTRATION_ADRESS,DATABASE з mail_config
 from project.mail_config import mail, ADMINISTRATION_ADRESS,DATABASE
+# ствоюємо функцію render_basket_page
 def render_basket_page():
     send=False
     print(2132113)
@@ -783,12 +863,19 @@ def render_basket_page():
                 carts = Cart.query.all()
                 for cart1 in carts:
                     if cart1.user_id == flask_login.current_user.id:
-                        
+                        message = Message(
+                            "Message Order",
+                            sender= ADMINISTRATION_ADRESS, 
+                            recipients= ['epi99k@gmail.com'], 
+                            body= f'користувач {flask_login.current_user.login} скасував замовлення'
+                        )
+                        mail.send(message)
+                        send = False
                         telegram_bot.bot.delete_message(chat_id=cart1.chat_id,message_id=cart1.message_id)
                         DATABASE.session.delete(cart1)
                         DATABASE.session.commit()
-            except:
-                pass
+            except Exception as error:
+                print(error)
     try:
         count =  flask.request.cookies.get('products').split(" ") 
     except:
@@ -801,7 +888,7 @@ def render_basket_page():
     for product1 in Product.query.all():
         list_count[str(product1.id)] = str(count.count(str(product1.id)))
         print(type(product1.id))
-    
+    # возвращаемо код html сторінки
     cookie = flask.make_response(
         flask.render_template(template_name_or_list="basket.html",
                               name=flask_login.current_user.login, 
@@ -816,11 +903,14 @@ def render_basket_page():
 + home_page/views.py 
 + опис / description: none
 ```python
+# імпортуємо flask
 import flask 
+# імпортуємо flask_login
 import flask_login
+# ствоюємо функцію render_home_page
 def render_home_page():
     try:
-        count =  len(flask.request.cookies.get('products').split(" "))
+        count =  len(flask.request.cookies.get('products').split(" ")) # python + flask get
         if flask.request.cookies.get('products').split(" ")[0]== "":
             count = "0"
     except:
@@ -829,6 +919,7 @@ def render_home_page():
     if flask_login.current_user.is_authenticated:
         code=flask_login.current_user.login
     print(code)
+    # возвращаемо код html сторінки
     return flask.render_template(
         template_name_or_list= "home.html", 
         code=code,
@@ -836,27 +927,69 @@ def render_home_page():
     )
 ```
 
-+ contacts_page/views.py
++ registration_page/views.py
 + опис / description: none
 ```python
+# імпортуємо flask
 import flask
-import flask_login
+# імпортуємо з models клас User
+from .models import User
+# імпортуємо з settings базу даних
+from project.settings import DATABASE
+# створюємо функцію render_reg_page
+def render_reg_page():
+    code  = False
+        
+    if flask.request.method == "POST":
+        print(flask.request.form)
+    
+        if flask.request.form['password'] == flask.request.form['Password_confirmation']:
+            
 
+            user = User(
+                login = flask.request.form['login'],
+                email = flask.request.form['email'],
+                password = flask.request.form['password'],
+                is_admin = False
+            )
+
+            try:
+                DATABASE.session.add(user)
+                DATABASE.session.commit()
+                code = "--> authorization"
+            except Exception as error:
+                return error
+    # вертаємо код сторінки
+    return flask.render_template(
+        template_name_or_list= "reg.html",
+        code =  code
+    )
+```
++ contacts_page/views.py
+```python
+# імпортуємо flask
+import flask
+# імпортуємо flask_login
+import flask_login
+# створюємо функцію render_contacts_page
 def render_contacts_page():
     try:
-        count =  len(flask.request.cookies.get('products').split(" ")) 
+        count =  len(flask.request.cookies.get('products').split(" ")) # python + flask get
         if flask.request.cookies.get('products').split(" ")[0]== "":
             count = "0"
     except:
         count = "0"
-    
+    # возвращаемо код html сторінки
     return flask.render_template(template_name_or_list="contacts.html",name=flask_login.current_user.login,count=count)
 ```
 + registration_page/models.py
 + опис / description: потрібен для створення таблиць та роботи з ними / is needed to create tables and work with them
 ```python
+# імпортуємо з settings базу даних
 from project.settings import DATABASE
+# імпортуємо flask_login
 import flask_login
+# створюємо класс User 
 class User(DATABASE.Model, flask_login.UserMixin):
     id = DATABASE.Column(DATABASE.Integer, primary_key = True)
     login= DATABASE.Column(DATABASE.String(55))
@@ -865,7 +998,7 @@ class User(DATABASE.Model, flask_login.UserMixin):
     is_admin = DATABASE.Column(DATABASE.Boolean, nullable = False)
     def __repr__(self) -> str:
         return f"login - {self.login}"
-    
+# створюємо класс Product  
 class Product(DATABASE.Model, flask_login.UserMixin):
     id = DATABASE.Column(DATABASE.Integer, primary_key = True)
     name = DATABASE.Column(DATABASE.String(60))
@@ -878,6 +1011,7 @@ class Product(DATABASE.Model, flask_login.UserMixin):
     capacity3 = DATABASE.Column(DATABASE.String(10), nullable = False)
     def __repr__(self) -> str:
         return f"id - {self.id}"
+# створюємо класс Cart
 class Cart(DATABASE.Model):
     id = DATABASE.Column(DATABASE.Integer, primary_key = True)
     user_id = DATABASE.Column(DATABASE.Integer, primary_key = True)
@@ -1363,5 +1497,6 @@ export default oformed
 5. write in the console: **flask --app settings db upgrade**
 
 ### описание того, что такое база данных, почему именно SQLite3, какую роль выполняет id в таблицах базы данных.
-+ none
++ База даних  — це організована структура, яка призначена для зберігання, зміни та обробки взаємозалежної інформації, переважно великих обсягів.
++ SQLite3 ми використовували в telegram_bot, а також використовували для того щоб telegram_bot був окремим додатком и щоб міг використовуватись окремо
 

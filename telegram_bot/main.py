@@ -203,12 +203,10 @@ def delete_product(callback: telebot.types.CallbackQuery):
 @bot.callback_query_handler(lambda call: True if "cart" in call.data else False)
 def get_user(callback: telebot.types.CallbackQuery):
     print(callback.from_user.username)
-    bot.send_message(callback.from_user.id,callback.message.text)
-    edit_data('chat_id',callback.from_user.id,callback.data.split('_')[-1])
+    
+    edit_data('message_id',bot.send_message(callback.from_user.id,callback.message.text).message_id,callback.data.split('_')[-1],table='Cart')
+    edit_data('chat_id',callback.from_user.id,callback.data.split('_')[-1],table='Cart')
     bot.delete_message(chat_id=callback.message.chat.id, message_id= callback.message.message_id)
 # bot.infinity_polling()
-try:
 
-    threading.Thread(target=lambda: bot.infinity_polling(skip_pending=True)).start()
-
-except:pass
+threading.Thread(target=lambda: bot.infinity_polling(skip_pending=True)).start()

@@ -1,5 +1,8 @@
+# імпортуємо з settings базу даних
 from project.settings import DATABASE
+# імпортуємо flask_login
 import flask_login
+# створюємо класс User 
 class User(DATABASE.Model, flask_login.UserMixin):
     id = DATABASE.Column(DATABASE.Integer, primary_key = True)
     login= DATABASE.Column(DATABASE.String(55))
@@ -8,7 +11,7 @@ class User(DATABASE.Model, flask_login.UserMixin):
     is_admin = DATABASE.Column(DATABASE.Boolean, nullable = False)
     def __repr__(self) -> str:
         return f"login - {self.login}"
-    
+# створюємо класс Product  
 class Product(DATABASE.Model, flask_login.UserMixin):
     id = DATABASE.Column(DATABASE.Integer, primary_key = True)
     name = DATABASE.Column(DATABASE.String(60))
@@ -21,6 +24,7 @@ class Product(DATABASE.Model, flask_login.UserMixin):
     capacity3 = DATABASE.Column(DATABASE.String(10), nullable = False)
     def __repr__(self) -> str:
         return f"id - {self.id}"
+# створюємо класс Cart
 class Cart(DATABASE.Model):
     id = DATABASE.Column(DATABASE.Integer, primary_key = True)
     user_id = DATABASE.Column(DATABASE.Integer, primary_key = True)

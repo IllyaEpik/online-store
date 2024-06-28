@@ -1,7 +1,12 @@
+# імпортуємо flask
 import flask
+# імпортуємо flask_login
 import flask_login
+# імпортуємо os
 import os
+# імпортуємо DATABASE з project
 from project.settings import DATABASE
+# імпортуємо class Product з models
 from registration_page.models import Product
 dict_types={
     "IMG":"IMG",
@@ -9,6 +14,7 @@ dict_types={
     "PRICE":"INT",
     "DISCOUNT": "INT"
 }
+# створюємо функцію render_shop_page
 def render_shop_page():
     mod = False
     type1 = None
@@ -50,6 +56,8 @@ def render_shop_page():
                         Product.query.get(id).price = text
                     if type1 == "DISCOUNT":
                         Product.query.get(id).discount = text
+                        DATABASE.session.commit()
+                        DATABASE.session.commit()
         except Exception as Error:
             print(Error)
             try:
@@ -91,7 +99,9 @@ def render_shop_page():
             count = "0"
     except:
         count = "0"
+    DATABASE.session.commit()
     admin=flask_login.current_user.is_admin
+    # возвращаемо код html сторінки
     cookie = flask.make_response(
         flask.render_template(template_name_or_list="shop.html",
                               name=flask_login.current_user.login, 

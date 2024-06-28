@@ -1,8 +1,14 @@
+# імпортуємо flask
 import flask
+# імпортуємо flask_login
 import flask_login
-from registration_page.models import Cart, Product
+# імпортуємо class Product Cart User з models
+from registration_page.models import Cart, Product, User
+# імпортуємо Message з flask_mail
 from flask_mail import Message
+# імпортуємо mail, ADMINISTRATION_ADRESS,DATABASE з mail_config
 from project.mail_config import mail, ADMINISTRATION_ADRESS,DATABASE
+# ствоюємо функцію render_basket_page
 def render_basket_page():
     send=False
     print(2132113)
@@ -63,12 +69,19 @@ def render_basket_page():
                 carts = Cart.query.all()
                 for cart1 in carts:
                     if cart1.user_id == flask_login.current_user.id:
-                        
+                        message = Message(
+                            "Message Order",
+                            sender= ADMINISTRATION_ADRESS, 
+                            recipients= ['epi99k@gmail.com'], 
+                            body= f'користувач {flask_login.current_user.login} скасував замовлення'
+                        )
+                        mail.send(message)
+                        send = False
                         telegram_bot.bot.delete_message(chat_id=cart1.chat_id,message_id=cart1.message_id)
                         DATABASE.session.delete(cart1)
                         DATABASE.session.commit()
-            except:
-                pass
+            except Exception as error:
+                print(error)
     try:
         count =  flask.request.cookies.get('products').split(" ") 
     except:
@@ -81,7 +94,7 @@ def render_basket_page():
     for product1 in Product.query.all():
         list_count[str(product1.id)] = str(count.count(str(product1.id)))
         print(type(product1.id))
-    
+    # возвращаемо код html сторінки
     cookie = flask.make_response(
         flask.render_template(template_name_or_list="basket.html",
                               name=flask_login.current_user.login, 
