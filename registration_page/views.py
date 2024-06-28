@@ -1,15 +1,8 @@
-import flask 
-import flask_login
+import flask
 from .models import User
 from project.settings import DATABASE
-# import os
-# import json
 def render_reg_page():
-    # path_json = os.path.abspath(__file__ + "/../static/json/data.json")
-    # with open(path_json, encoding= "utf-8") as file:
-    #     read_data =  json.load(file)
     code  = False
-    # if flask_login.current_user.is_authenticated:
         
     if flask.request.method == "POST":
         print(flask.request.form)

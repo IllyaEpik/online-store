@@ -2,8 +2,6 @@ import flask
 import flask_login
 from registration_page.models import User
 from home_page.views import render_home_page
-# import os
-# import json
 def render_login_page():
     
     code=False
@@ -20,7 +18,6 @@ def render_login_page():
                     return flask.redirect('/')
             if  code:
                 for user in User.query.filter_by(email=flask.request.form['login']):
-                    # print(user)
                     if user.password == flask.request.form['password']:
                         flask_login.login_user(user)
                         code = False

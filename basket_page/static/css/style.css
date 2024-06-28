@@ -425,7 +425,7 @@ color: #000000;
     z-index: 2;
     position: absolute;
 }
-form{
+.forming{
     justify-content: center;
     position: fixed;
     box-sizing: border-box;

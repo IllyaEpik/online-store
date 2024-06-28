@@ -35,11 +35,9 @@ shop page
     <div class="start">
         <img src="{{ url_for('shop.static', filename = '/image/') }}{{ product.name }}.png" alt="" class="product-img">
         {% if admin %}
-            <!-- <form action="" method="post"> -->
                 <button class = "editorButton img" name="img" type="submit" value="{{product.id}}">
                     <img  src="{{ url_for('shop.static', filename = '/image/') }}Vector.png" class = "editorImg" alt="">
                 </button>
-            <!-- </form> -->
            
         {% endif %}
         <div class = "product">
@@ -48,27 +46,21 @@ shop page
             
             {% if admin %}
                 <h1>{{ product.name }}
-                    <!-- <form method="post"> -->
                         <button class = "editorButton name" name="name" type="submit" value="{{product.id}}">
                             <img src="{{ url_for('shop.static', filename = '/image/') }}Vector.png" class = "editorImg" alt="">
-                        </button> 
-                    <!-- </form> -->
+                        </button>
                 </h1>  
                 
                 <h3 class="price">{{ product.price}} грн
-                    <!-- <form method="post"> -->
                         <button class = "editorButton priceButton" name="price" type="submit" value="{{product.id}}" >
                             <img src="{{ url_for('shop.static', filename = '/image/') }}Vector.png" class = "editorImg" alt="">
                         </button>
-                    <!-- </form> -->
                 </h3>
 
                 <h3 class="discount">Знижка {{product.discount}}%
-                    <!-- <form method="post"> -->
                         <button class = "editorButton discountButton" name="discount" type="submit" value="{{ product.id}}">
                             <img src="{{ url_for('shop.static', filename = '/image/') }}Vector.png" class = "editorImg" alt="">
                         </button>
-                    <!-- </form> -->
                 </h3>
             {% elif product.discount != 0 %}
                 <h1>{{ product.name }}</h1>  
@@ -85,9 +77,7 @@ shop page
                 <h1 id="scop">{{ product.name }}</h1>  
             {% endif %}
             <h2>{{ int(product.price - product.discount/100*product.price)  }} грн</h2>
-            <!-- <form method="POST"> -->
             <button class="buy" id = "{{ product.id }}" >Купити</button>
-            <!-- </form> -->
             <h3 class="capacity">Ємність:</h3>
             {% if admin %}
                 <div id = "{{ product.id}}">
@@ -102,7 +92,6 @@ shop page
                             <img src="{{ url_for('shop.static', filename = '/image/') }}Vector.png" class = "editorImg" alt="">
                         </button>
                     </button>
-                    <!-- Capacity -->
                     <button class="white capacityButton" id = "{{ product.id}}">1 Тб
                         <button class = "editorButton b3" >
                             <img src="{{ url_for('shop.static', filename = '/image/') }}Vector.png" class = "editorImg" alt="">
@@ -118,10 +107,8 @@ shop page
             {% endif %}
             {% if admin %}
                 <form class="deleteForm" method="post">
-                    
                     <img src="{{ url_for('shop.static', filename = '/image/')}}Delete.png" alt="" class="delete deleteImg">
                     <button class="delete deleteP" type="submit" name="delete" value="{{product.id}}">Видалити Товар</button>
-                    <!-- <button></button> -->
                 </form>
             {% else %}
                 <div class="deleteForm">
@@ -159,7 +146,6 @@ shop page
     <h1 class="name-edit add">NAME PRODUCT:</h1>
     <input type = "text" name = "name" class="modal-input add">
     <h1 class="name-edit add">DESCRIPTION PRODUCT:</h1>
-    <!-- <input type = "text" name = "description" class="modal-input" > -->
     <textarea name="description"class="modal-input add" ></textarea>
     
     <h1 class="name-edit add">PRICE PRODUCT:</h1>

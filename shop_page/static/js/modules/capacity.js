@@ -1,7 +1,5 @@
 function check(){
     let white = document.querySelectorAll(".white")
-    
-    // document.querySelector('.white')
     let orange = document.querySelectorAll(".orange")
     console.log(white , orange)
     for (let count = 0; count < white.length; count++){

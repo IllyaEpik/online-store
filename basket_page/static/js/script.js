@@ -6,7 +6,6 @@ let plusButtons = document.querySelectorAll(".edit2")
 let minusButtons = document.getElementsByClassName("edit1")
 let countText = document.querySelectorAll("#count")
 
-// if (plusButtons.length = )
 function cordinate(){
     let y = 175
     let borders = document.querySelectorAll(".border")
@@ -14,13 +13,9 @@ function cordinate(){
     let listEdit = document.querySelectorAll(".edit")
     let listPriceDiv = document.querySelectorAll(".price-div")
     let listH3 = document.querySelectorAll(".price-h3")
-    // countTag.previousElementSibling
     let countTag = document.querySelector(".count-products")
     let allPrice = document.querySelector(".all-price")
     let disCountTag = document.querySelector(".discount")
-    // listEdit[0].style.top = 75
-    // listCount[0].style.top = -20
-    // borders[0].style.top = 175
     let disCount=0
     let countProducts=0
     let priceProducts=0
@@ -33,13 +28,10 @@ function cordinate(){
         disCounting = disCounting/100*Number(listH3[count].previousElementSibling.id)
         disCounting = disCounting*Number(listCount[count].textContent)
         disCount +=  disCounting
-        // countTag.nextElementSibling.style.left=60
         borders[count].style.top = y+count*300
         listCount[count].style.top = -20
         listEdit[count].style.top = 75
         listPriceDiv[count].style.top = 60
-        // listH3[count].previousElementSibling
-        // console.log(listH3[count].previousElementSibling.style.width)
         console.log(listH3[count].tagName)
         let text1= listH3[count].previousElementSibling.textContent
         if (text1.length > 3){
@@ -49,7 +41,6 @@ function cordinate(){
         listH3[count].style.left = 60
         listH3[count].style.top = 8
     }
-    
     allPrice.textContent=`${priceProducts-disCount} грн`
     try{
         let text = countTag.textContent.split("-")
@@ -63,23 +54,16 @@ function cordinate(){
         console.log("'fa;c.ksmld;.s4a3x4'eals;fd")
     }
 }
-// console.log(plusButtons,document.getElementsByClassName("edit2").length)
-// console.log(minusButtons)
 function destroy(){
     let divs = document.querySelectorAll(".start")
-    // console.log(divs)
     for (let count = 0; count < divs.length; count++){
-        // console.log(id)
         let div = divs[count]
         let id = div.id
         try{
             let count1 = 0
             try{
             let cookie = document.cookie.split("=")[1].split(" ")
-            
-            // console.log(cookie)
             for (let count2 = 0; count2 < cookie.length; count2++ ){
-                // console.log(`${cookie[count]}`)/
                 if (`${cookie[count2]}`==`${id}`){
                     count1++
                 }
@@ -91,7 +75,6 @@ function destroy(){
             }
         }catch{
             div.remove()
-            
         }
     }
     if (document.querySelectorAll(".start").length==0){
@@ -103,7 +86,6 @@ function destroy(){
     }
     cordinate()
 }
-// destroy()
 
 
 function counting (id){
@@ -122,9 +104,7 @@ function counting (id){
     let cookie = document.cookie.split("=")[1].split(" ")
     document.querySelector("#message").textContent = `${cookie.length}`
     let count1 = 0
-    // console.log(cookie)
     for (let count = 0; count < cookie.length; count++ ){
-        // console.log(`${cookie[count]}`)
         if (`${cookie[count]}`==`${id}`){
             count1++
         }
@@ -146,22 +126,16 @@ for (let count = 0; count < plusButtons.length; count++){
     counting(id)
     button.addEventListener("click", function (event){
         if (document.cookie==""){
-            // document.querySelector(".message").style.display = 'block'
-            // document.querySelector("#message").style.display = 'block'
             document.cookie=`products=${id};path=/`
         }
         else{
             var cookie = document.cookie.split("=")[1]
             console.log('hello')
-            // console.log("end", cookie) 
             cookie =  cookie + ' ' + id
             document.cookie = `products=${cookie};path=/`
             counting(id)
-            // document.querySelector("#message").textContent = `${cookie.split(" ").length-1}`
-
         }
     })
-    // console.log(2)
 }
 
 for (let count = 0; count < minusButtons.length; count++){
@@ -169,16 +143,11 @@ for (let count = 0; count < minusButtons.length; count++){
     
     button.addEventListener("click", function (event){
         if (document.cookie==""){
-            // document.querySelector(".message").style.display = 'block'
-            // document.querySelector("#message").style.display = 'block'
-            // document.cookie=`products=${button.id};path=/`
         }
         else{
             var cookie = document.cookie.split("=")[1].split(" ")
             cookie.splice(cookie.indexOf(button.id),1)
             document.cookie = `products=${cookie.join(" ")};path=/`
-            // document.querySelector("#message").textContent = `${cookie.split(" ").length-1}`
-            // console.log((12))
             counting(button.id)
         }
         

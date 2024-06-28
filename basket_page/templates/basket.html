@@ -61,21 +61,18 @@ Cart page
     <h3 class = "all-price">133 997 грн</h3>
 </div>
 {% else %}
-<!-- <footer> -->
 
-    <div class="after-form">
+    <form class="after-form" method="post">
         <div style="text-align: center;">
             <h2 class="price-name">Загальна вартість замовлення: <span class = "all-price" style="position: unset;"></span></h2>
-            <!-- <h3 >133 997 грн</h3> -->
         </div>
         
-        <button class="form">Відмінити замовлення</button>
-    </div>
-<!-- </footer> -->
+        <button class="form" name="type" value="after-form">Відмінити замовлення</button>
+    </form>
 {% endif %}
 <div class="modal" style="display: none;">
-    <form action="" method="post">
-        <h1>оформлення замовлення</h1>
+    <form action="" method="post" class="forming">
+        <h1  name="type" value="form">оформлення замовлення</h1>
         <h2 class="data">Ім'я</h2>
         <input type="text" name="name" required class="get-data">
         <h2 class="data">Прізвище</h2>
@@ -90,7 +87,6 @@ Cart page
         <input type="text" name="post" required class="get-data">
         <h2 class="data">Додаткові побажання</h2>
         <Textarea type="text" name="add" class="get-data"></Textarea>
-        <!-- <input type="text" name="add"> -->
         <button type="submit" class="submit" name="submit" value="">Send</button>
     </form>
     <div class="background"></div>

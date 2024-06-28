@@ -27,14 +27,11 @@ function oformed(){
     }catch{
         
     }
-    // console.log()
     for (let count = 0; count < start.length; count++){
 
         start[count].style.display = 'flex'
         start[count].style.justifyContent = 'center'
         border[count].style.alignItems = 'center'
-        // border[count].style.width = 'fit-content'
-        // border[count].style.height = 'max-content'
         border[count].style.display = 'flex'
         border[count].style.position = 'unset'
         edit[count].style.position = 'unset'
@@ -62,38 +59,5 @@ function oformed(){
     }
     
     center(button)
-    // document.querySelector().style.textAlign
-    // img.style.position = 'absolute'
-    // img.style.left = 50
-
-    // console.log(border)
-    // let y_2= 200
-    // for(let count = 0; count < start.length; count++){
-    //     // start[count].style.borderRight = 12
-    //     start[count].style.position = 'absolute'
-    //     start[count].style.left = 400
-    //     start[count].style.top = y_2
-    //     border[count].style.top = 100
-    //     name[count].style.left = -50
-    //     name[count].style.position = "absolute"
-    //     counts[count].style.left = -200
-    //     counts[count].style.top = -63
-    //     // border[count].style.width = 150
-    //     y_2 += 350
-    // }
-    // price.style.position = "unset"
-    // price.style.display = "flex"
-    // center(button)
-    // center(price)
-    // let y = 200+306*start.length
-    // console.log(y)
-    // price_name.style.marginTop = y
-    // price.style.marginTop = 0
-
-    // price.style.marginLeft = 900
-    // button.style.marginTop = 10
-
-    // center(start)
-    // document.querySelector().style.marginRight = 'auto'
 }
 export default oformed

@@ -6,7 +6,6 @@ from login_page import login,render_login_page
 import shop_page, shop_page.app, shop_page.views
 from .settings import shop
 import basket_page
-# from contacts_page import c
 import contacts_page, contacts_page.app, contacts_page.views
 home.add_url_rule(rule="/",view_func= render_home_page, methods = ['GET', 'POST'])
 login.add_url_rule(rule= "/login/",view_func=render_login_page, methods=["GET","POST"])
