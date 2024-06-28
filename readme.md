@@ -10,8 +10,7 @@
 #### опис:
   - Цей додаток використовується для продажу та купівлі продуктів
 ###### інтерактивна демоверсія проекту:
-![alt text](giphy.gif) 
-<video controls src="1.mp4" title="demoVersion"></video>
+![alt text](uTUdyg.gif)
 ###### Чому проект корисений. Що саме корисного несе ваш проект для оточуючих, особливо для вас як для новачків у цьому напрямку:
   - Він корисний тим що удобний для використання і він корисний тим що він готовий для заробітку грошей
 ###### Why the project is used. What exactly is your project useful for others, especially for you as a beginner in this direction:
